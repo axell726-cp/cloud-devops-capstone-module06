@@ -1,0 +1,18 @@
+# Actions deployment and monitoring — 2026-11-11
+
+Run: https://github.com/axell726-cp/cloud-devops-capstone-module06/actions/runs/42971994272
+Worker: cloud-devops-capstone-module06
+Deployed version: 1c0d24b4-8db7-4a91-9f22-e1dc2ac89b4d
+Deploy job: success
+Public HTTPS smoke: 26/26 checks passed.
+Monitoring sample from wrangler tail --format json:
+- Invocations/request logs: 20
+- Successful invocations: 20
+- Worker exceptions: 0
+- Server error responses (5xx): 0
+- HTTP 4xx responses: 12 (expected negative validation cases)
+- Average wall time: 26.85 ms
+- Average CPU time: 0.9 ms
+- Average application duration: 24.35 ms
+
+The workflow sanitizer omits client IP, request headers, URL, geolocation, TLS fingerprints and task content. This is a point-in-time sample, not continuous monitoring.
