@@ -1,0 +1,28 @@
+### npm run lint
+PASS
+RESULT: PASS
+### npm run build
+> wrangler deploy --dry-run --outdir .worker-build
+Total Upload: 10.44 KiB / gzip: 3.27 KiB
+--dry-run: exiting now.
+RESULT: PASS
+### npm run db:migrate:local
+> cloud-devops-capstone-module06@1.0.0 db:migrate:local
+> wrangler d1 migrations apply taskflow-capstone-module06 --local
+Resource location: local 
+Use --remote if you want to access the remote instance.
+Migrations to be applied:
+Your database may not be available to serve requests during the migration, continue?
+🌀 Executing on local database taskflow-capstone-module06 ([resource-id]) from .wrangler\state\v3\d1:
+🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+🚣 4 commands executed successfully.
+RESULT: PASS
+### npm run db:migrate:remote
+> cloud-devops-capstone-module06@1.0.0 db:migrate:remote
+> wrangler d1 migrations apply taskflow-capstone-module06 --remote
+Resource location: remote 
+Migrations to be applied:
+Your database may not be available to serve requests during the migration, continue?
+🌀 Executing on remote database taskflow-capstone-module06 ([resource-id]):
+🌀 To execute on your local development database, remove the --remote flag from your wrangler command.
+RESULT: PASS

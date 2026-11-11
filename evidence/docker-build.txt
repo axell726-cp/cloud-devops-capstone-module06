@@ -1,0 +1,62 @@
+ Image cloud-devops-capstone-module06:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 678B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 718B 0.1s done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/node:22-slim
+#3 DONE 0.9s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 124B 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [1/8] FROM docker.io/library/node:22-slim@sha256:5ec23b7c622b00547753bc6ffd78085dd868a68aeb41c8e0a1418f033e13d96d
+#6 resolve docker.io/library/node:22-slim@sha256:5ec23b7c622b00547753bc6ffd78085dd868a68aeb41c8e0a1418f033e13d96d 0.0s done
+#6 DONE 0.1s
+
+#5 [internal] load build context
+#5 transferring context: 978B 0.0s done
+#5 DONE 0.0s
+
+#7 [5/8] RUN chown node:node /app
+#7 CACHED
+
+#8 [2/8] WORKDIR /app
+#8 CACHED
+
+#9 [3/8] RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
+#9 CACHED
+
+#10 [7/8] COPY --chown=node:node . .
+#10 CACHED
+
+#11 [4/8] COPY --chown=node:node package.json package-lock.json ./
+#11 CACHED
+
+#12 [6/8] RUN npm ci
+#12 CACHED
+
+#13 [8/8] RUN mkdir -p /app/.wrangler
+#13 CACHED
+
+#14 exporting to image
+#14 exporting layers 0.0s done
+#14 exporting manifest sha256:a0f6e1faf8de98186f87c06a16a96d584047b099b8fb0ca6758c4e61035d3155 done
+#14 exporting config sha256:5597c7eaf4fa268147bffdeb8e8309c95ed5ee153461d44062110ce90ecfbc95 done
+#14 exporting attestation manifest sha256:f337705c5ba45be8337599194655e2c90d87d53aa2027c2ecf784e16cd55b5dc
+#14 exporting attestation manifest sha256:f337705c5ba45be8337599194655e2c90d87d53aa2027c2ecf784e16cd55b5dc 0.0s done
+#14 exporting manifest list sha256:69228d8c430d63d2d1327bd6b44c505b7c41c77d580112aed87f569184a08a04 0.0s done
+#14 naming to docker.io/library/cloud-devops-capstone-module06:local 0.0s done
+#14 unpacking to docker.io/library/cloud-devops-capstone-module06:local 0.0s done
+#14 DONE 0.2s
+
+#15 resolving provenance for metadata file
+#15 DONE 0.0s
+ Image cloud-devops-capstone-module06:local Built 

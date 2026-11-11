@@ -1,0 +1,4 @@
+dns_lookup=success hostname=cloud-devops-capstone-module06.cloud-webapp-module03.workers.dev ipv4_records=2
+external_https_status=200
+health_status=ok
+d1_connection=connected

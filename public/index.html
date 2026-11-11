@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fc">
+  <meta name="description" content="TaskFlow Cloud: organiza tareas, prioridades y avances con persistencia en la nube.">
+  <title>TaskFlow Cloud — DevOps Capstone</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="TaskFlow Cloud, inicio"><span class="brand-mark" aria-hidden="true">✓</span><span>taskflow<span class="brand-dot">.</span></span><span class="brand-cloud">CLOUD</span></a>
+    <div id="connection-status" class="connection-pill" role="status"><span class="status-dot"></span><span>Conectando</span></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy"><p class="eyebrow">CLOUD &amp; DEVOPS CAPSTONE · MODULE 06</p><h1>Haz espacio para<br><span>lo que sigue.</span></h1><p class="hero-description">Organiza prioridades, avanza en cada etapa y mantén tu trabajo sincronizado.</p></div>
+      <div class="hero-visual" aria-hidden="true"><div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div><div class="hero-tile"><span>✓</span></div><span class="hero-spark spark-a">✦</span><span class="hero-spark spark-b">✧</span></div>
+    </section>
+    <section class="stats-grid" aria-label="Estadísticas de tareas">
+      <article class="stat-card stat-total"><span class="stat-icon" aria-hidden="true">▤</span><span class="stat-label">Todas</span><strong id="stat-total">0</strong></article>
+      <article class="stat-card stat-pending"><span class="stat-icon" aria-hidden="true">◷</span><span class="stat-label">Pendientes</span><strong id="stat-pending">0</strong></article>
+      <article class="stat-card stat-progress"><span class="stat-icon" aria-hidden="true">↗</span><span class="stat-label">En progreso</span><strong id="stat-progress">0</strong></article>
+      <article class="stat-card stat-completed"><span class="stat-icon" aria-hidden="true">✓</span><span class="stat-label">Completadas</span><strong id="stat-completed">0</strong></article>
+    </section>
+    <section class="task-panel" aria-labelledby="tasks-heading">
+      <div class="panel-heading"><div><p class="eyebrow">TU ESPACIO DE TRABAJO</p><h2 id="tasks-heading">Mis tareas</h2></div><span id="task-count" class="task-count">0 resultados</span></div>
+      <form id="task-form" class="add-form">
+        <label class="sr-only" for="task-title">Descripción</label><input id="task-title" name="title" type="text" maxlength="120" placeholder="¿Qué quieres lograr?" autocomplete="off" required>
+        <label class="sr-only" for="task-status">Estado inicial</label><select id="task-status" name="status" aria-label="Estado inicial"><option value="pending">Pendiente</option><option value="in_progress">En progreso</option><option value="completed">Completada</option></select>
+        <label class="sr-only" for="task-priority">Prioridad</label><select id="task-priority" name="priority" aria-label="Prioridad"><option value="medium">Prioridad media</option><option value="high">Prioridad alta</option><option value="low">Prioridad baja</option></select>
+        <button class="primary-button" type="submit"><span aria-hidden="true">＋</span> Añadir tarea</button>
+      </form>
+      <div class="list-toolbar">
+        <div class="filters" role="group" aria-label="Filtrar por estado"><button class="filter-button is-active" type="button" data-status="all" aria-pressed="true">Todas</button><button class="filter-button" type="button" data-status="pending" aria-pressed="false">Pendientes</button><button class="filter-button" type="button" data-status="in_progress" aria-pressed="false">En progreso</button><button class="filter-button" type="button" data-status="completed" aria-pressed="false">Completadas</button></div>
+        <div class="search-controls"><label class="sr-only" for="task-search">Buscar tareas</label><input id="task-search" type="search" maxlength="120" placeholder="Buscar…"><label class="sr-only" for="priority-filter">Filtrar prioridad</label><select id="priority-filter"><option value="all">Prioridad: todas</option><option value="high">Alta</option><option value="medium">Media</option><option value="low">Baja</option></select></div>
+      </div>
+      <p id="list-message" class="list-message" aria-live="polite"></p><ul id="task-list" class="task-list" aria-live="polite"></ul>
+      <div id="empty-state" class="empty-state"><span class="empty-illustration" aria-hidden="true">✧</span><strong>No hay tareas en esta vista</strong><span>Prueba otro filtro o añade una tarea nueva.</span></div>
+    </section>
+    <p class="privacy-note">Demo pública y compartida. Usa solo tareas ficticias; no ingreses datos personales ni secretos.</p>
+  </main>
+  <footer class="footer"><span>TaskFlow Cloud · internship capstone</span><span>Cloudflare Workers · D1</span></footer>
+</div>
+<dialog id="edit-dialog" class="edit-dialog"><form id="edit-form"><div class="dialog-heading"><p class="eyebrow">EDITAR TAREA</p><button id="close-edit" type="button" class="icon-button" aria-label="Cerrar">×</button></div><label for="edit-title">Descripción</label><input id="edit-title" name="title" maxlength="120" required><div class="dialog-actions"><button id="cancel-edit" class="secondary-button" type="button">Cancelar</button><button class="primary-button" type="submit">Guardar cambios</button></div></form></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

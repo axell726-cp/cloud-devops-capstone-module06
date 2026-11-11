@@ -1,0 +1,44 @@
+name: cloud-devops-capstone-module06
+
+services:
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cloud-devops-capstone-module06:local
+    container_name: taskflow-capstone-module06-local
+    init: true
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - capstone-wrangler-state:/app/.wrangler
+    networks:
+      - capstone-taskflow
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,noexec,nosuid
+      - /app/node_modules/.mf:uid=1000,gid=1000,mode=0700,size=32m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 384m
+    cpus: 1.0
+    restart: "no"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:8787/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 20s
+      timeout: 4s
+      start_period: 15s
+      retries: 5
+
+networks:
+  capstone-taskflow:
+    driver: bridge
+
+volumes:
+  capstone-wrangler-state:

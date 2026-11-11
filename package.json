@@ -1,0 +1,18 @@
+{
+  "name": "cloud-devops-capstone-module06",
+  "private": true,
+  "version": "1.0.0",
+  "description": "TaskFlow Cloud capstone with Workers, D1, Docker and GitHub Actions",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "lint": "node scripts/lint.mjs",
+    "build": "wrangler deploy --dry-run --outdir .worker-build",
+    "test:smoke": "node scripts/smoke.mjs",
+    "db:migrate:local": "wrangler d1 migrations apply taskflow-capstone-module06 --local",
+    "db:migrate:remote": "wrangler d1 migrations apply taskflow-capstone-module06 --remote",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": { "wrangler": "4.159.0" }
+}

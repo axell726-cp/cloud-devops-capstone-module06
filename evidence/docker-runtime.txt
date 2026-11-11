@@ -1,0 +1,80 @@
+taskflow-capstone-module06-local  | 🌀 Executing on local database taskflow-capstone-module06 (f656d420-4b86-4f55-ac51-0db07221bb04) from .wrangler/state/v3/d1:
+taskflow-capstone-module06-local  | 🌀 To execute on your remote database, add a --remote flag to your wrangler command.
+taskflow-capstone-module06-local  | 🚣 4 commands executed successfully.
+taskflow-capstone-module06-local  | ┌───────────────────────┬────────┐
+taskflow-capstone-module06-local  | │ name                  │ status │
+taskflow-capstone-module06-local  | ├───────────────────────┼────────┤
+taskflow-capstone-module06-local  | │ 0001_create_tasks.sql │ ✅     │
+taskflow-capstone-module06-local  | └───────────────────────┴────────┘
+taskflow-capstone-module06-local  | 
+taskflow-capstone-module06-local  | > cloud-devops-capstone-module06@1.0.0 dev
+taskflow-capstone-module06-local  | > wrangler dev --port 8787 --ip 0.0.0.0
+taskflow-capstone-module06-local  | 
+taskflow-capstone-module06-local  | 
+taskflow-capstone-module06-local  |  ⛅️ wrangler 4.159.0 (update available 4.160.0)
+taskflow-capstone-module06-local  | ───────────────────────────────────────────────
+taskflow-capstone-module06-local  | Your Worker has access to the following bindings:
+taskflow-capstone-module06-local  | Binding                                      Resource         Mode
+taskflow-capstone-module06-local  | env.DB (taskflow-capstone-module06)          D1 Database      local
+taskflow-capstone-module06-local  | env.ASSETS                                   Assets           local
+taskflow-capstone-module06-local  | 
+taskflow-capstone-module06-local  | ⎔ Starting local server...
+taskflow-capstone-module06-local  | [wrangler:info] Ready on http://0.0.0.0:8787
+taskflow-capstone-module06-local  | [wrangler:info] - http://127.0.0.1:8787
+taskflow-capstone-module06-local  | [wrangler:info] - http://172.20.0.2:8787
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"fc8bf2ce-60c0-47a3-82be-f76b2682db8a","method":"GET","route":"health","status":200,"durationMs":677}
+taskflow-capstone-module06-local  | [wrangler:info] GET /health 200 OK (6148ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"c5a27c6d-30c1-4946-896f-bbd82d99f5db","method":"GET","route":"health","status":200,"durationMs":11}
+taskflow-capstone-module06-local  | [wrangler:info] GET /health 200 OK (26ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"e36e36fb-a0ff-471d-8b69-c1892a1e7eaf","method":"GET","route":"health","status":200,"durationMs":2}
+taskflow-capstone-module06-local  | [wrangler:info] GET /health 200 OK (14ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"d1544d3e-5230-4619-97fe-a1a0d7f44859","method":"GET","route":"health","status":200,"durationMs":2}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/health 200 OK (11ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"12d1a5cc-bcc9-44a8-a4cb-096b12224f1b","method":"GET","route":"/","status":200,"durationMs":39}
+taskflow-capstone-module06-local  | [wrangler:info] GET / 200 OK (60ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"4657333a-d3df-49e5-8e1e-99b6f900a1c5","method":"GET","route":"tasks","status":400,"durationMs":0}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/tasks 400 Bad Request (15ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"164de297-7f12-42cc-8ffb-8003b9bd5c26","method":"GET","route":"tasks","status":400,"durationMs":0}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/tasks 400 Bad Request (9ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"b4e41fe9-e015-4660-8dd2-4b139beccc4d","method":"GET","route":"tasks","status":400,"durationMs":0}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/tasks 400 Bad Request (13ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"9571bce8-48ab-479c-84f7-2aef6fbbd8da","method":"POST","route":"tasks","status":403,"durationMs":0}
+taskflow-capstone-module06-local  | [wrangler:info] POST /api/tasks 403 Forbidden (15ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"68dbb8d8-faa0-47fe-a898-ae12854ab06f","method":"POST","route":"tasks","status":415,"durationMs":18}
+taskflow-capstone-module06-local  | [wrangler:info] POST /api/tasks 415 Unsupported Media Type (80ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"72f33190-3fcd-4faa-bf21-bbf869882aaa","method":"POST","route":"tasks","status":400,"durationMs":11}
+taskflow-capstone-module06-local  | [wrangler:info] POST /api/tasks 400 Bad Request (33ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"0a5fa58b-3bd7-411e-b27d-ce06083abd4b","method":"POST","route":"tasks","status":413,"durationMs":0}
+taskflow-capstone-module06-local  | [wrangler:info] POST /api/tasks 413 Payload Too Large (15ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"408105b6-1737-4682-a9a7-db29152d85f1","method":"POST","route":"tasks","status":400,"durationMs":1}
+taskflow-capstone-module06-local  | [wrangler:info] POST /api/tasks 400 Bad Request (9ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"8f0b32ec-f050-4589-944d-dba0715ca484","method":"POST","route":"tasks","status":400,"durationMs":1}
+taskflow-capstone-module06-local  | [wrangler:info] POST /api/tasks 400 Bad Request (8ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"df7e8d2c-d31e-40aa-a1c2-4a90b8fea560","method":"POST","route":"tasks","status":400,"durationMs":0}
+taskflow-capstone-module06-local  | [wrangler:info] POST /api/tasks 400 Bad Request (14ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"9cd5e12d-6722-48c3-97d4-4977885de03a","method":"PATCH","route":"task_item","status":400,"durationMs":0}
+taskflow-capstone-module06-local  | [wrangler:info] PATCH /api/tasks/not-a-uuid 400 Bad Request (8ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"4d659097-cc13-4b1f-aedf-52d70b47d242","method":"PUT","route":"tasks","status":405,"durationMs":0}
+taskflow-capstone-module06-local  | [wrangler:info] PUT /api/tasks 405 Method Not Allowed (8ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"66ce2762-5fe7-48d8-aafa-6dfd750ff096","method":"POST","route":"tasks","status":201,"durationMs":18}
+taskflow-capstone-module06-local  | [wrangler:info] POST /api/tasks 201 Created (32ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"d567c10d-8b2e-4ac1-b4e7-81bf06ce06a4","method":"GET","route":"tasks","status":200,"durationMs":3}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/tasks 200 OK (10ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"e1dca033-0954-472f-9da8-46a9758a3524","method":"GET","route":"tasks","status":200,"durationMs":2}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/tasks 200 OK (10ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"01ec7322-6ce6-4e77-bd79-c50b178a2dc2","method":"GET","route":"tasks","status":200,"durationMs":3}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/tasks 200 OK (17ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"14fb57b8-fd09-45f7-9bf6-6928318a0566","method":"PATCH","route":"task_item","status":200,"durationMs":6}
+taskflow-capstone-module06-local  | [wrangler:info] PATCH /api/tasks/1a16a03d-baf3-4b79-b720-b33b7a4d7661 200 OK (17ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"9e433143-d6df-417c-bab9-612d1e37829e","method":"PATCH","route":"task_item","status":200,"durationMs":4}
+taskflow-capstone-module06-local  | [wrangler:info] PATCH /api/tasks/1a16a03d-baf3-4b79-b720-b33b7a4d7661 200 OK (14ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"1a346934-6c92-4c92-95d3-700ebafa3248","method":"PATCH","route":"task_item","status":200,"durationMs":5}
+taskflow-capstone-module06-local  | [wrangler:info] PATCH /api/tasks/1a16a03d-baf3-4b79-b720-b33b7a4d7661 200 OK (22ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"ab2b79a5-c7d9-4d6c-a566-97ec04a61adf","method":"GET","route":"tasks","status":200,"durationMs":2}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/tasks 200 OK (14ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"6e9d801a-a15e-431c-bac0-365f9a180706","method":"GET","route":"/api/stats","status":200,"durationMs":3}
+taskflow-capstone-module06-local  | [wrangler:info] GET /api/stats 200 OK (14ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"0b6bfc01-461d-4fdd-9c2f-caa83e3cfd05","method":"DELETE","route":"task_item","status":200,"durationMs":4}
+taskflow-capstone-module06-local  | [wrangler:info] DELETE /api/tasks/1a16a03d-baf3-4b79-b720-b33b7a4d7661 200 OK (17ms)
+taskflow-capstone-module06-local  | {"event":"http_request","requestId":"4d5de97b-c215-4a86-a3bb-dd68d8307802","method":"DELETE","route":"task_item","status":404,"durationMs":2}
+taskflow-capstone-module06-local  | [wrangler:info] DELETE /api/tasks/1a16a03d-baf3-4b79-b720-b33b7a4d7661 404 Not Found (18ms)

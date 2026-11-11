@@ -1,0 +1,128 @@
+name: Module 06 Capstone CI/CD
+
+on:
+  push:
+    branches: [main, 'codex/**']
+    paths-ignore:
+      - README.md
+      - LINKEDIN_POST.md
+      - evidence/**
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - README.md
+      - LINKEDIN_POST.md
+      - evidence/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: capstone-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lint, test and Docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Lint and static validation
+        run: npm run lint
+      - name: Build Worker bundle without deploying
+        run: npm run build
+      - name: Run Worker integration tests locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .wrangler
+          npm run db:migrate:local
+          node node_modules/wrangler/bin/wrangler.js dev --port 8787 --ip 127.0.0.1 > .wrangler/local-worker.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:8787/health >/dev/null; then break; fi
+            if [ "$attempt" -eq 40 ]; then cat .wrangler/local-worker.log; exit 1; fi
+            sleep 1
+          done
+          npm run test:smoke 2>&1 | tee .wrangler/local-smoke.log
+          cat .wrangler/local-worker.log
+      - name: Validate Compose configuration
+        run: docker compose config --quiet
+      - name: Build Docker image
+        run: docker compose --progress plain build
+      - name: Run Docker Compose and smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .wrangler
+          docker compose up -d --wait --wait-timeout 120
+          trap 'docker compose down -v --remove-orphans' EXIT
+          BASE_URL=http://127.0.0.1:8787 npm run test:smoke 2>&1 | tee .wrangler/docker-smoke.log
+          docker compose ps | tee .wrangler/docker-ps.log
+          docker compose logs --no-color --tail 100 worker | tee .wrangler/docker-runtime.log
+      - name: Clean up Module 06 validation container and volume
+        if: always()
+        run: docker compose down -v --remove-orphans
+  deploy:
+    name: Deploy and verify public Worker
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.CLOUDFLARE_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Deploy existing Worker from main
+        id: deploy
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          mkdir -p .wrangler
+          output=$(npm run deploy 2>&1) || { printf '%s\n' "$output"; exit 1; }
+          printf '%s\n' "$output" | tee .wrangler/deploy.log
+          worker_url=$(printf '%s\n' "$output" | grep -Eo 'https://[A-Za-z0-9._-]+\.workers\.dev' | tail -n 1)
+          if [ -z "$worker_url" ]; then echo 'Wrangler did not print a workers.dev URL.' >&2; exit 1; fi
+          echo "worker_url=$worker_url" >> "$GITHUB_OUTPUT"
+      - name: Public HTTPS smoke test and monitoring capture
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          BASE_URL: ${{ steps.deploy.outputs.worker_url }}
+        run: |
+          set -euo pipefail
+          mkdir -p .wrangler
+          node node_modules/wrangler/bin/wrangler.js tail cloud-devops-capstone-module06 --format json > .wrangler/tail-raw.json 2> .wrangler/tail-stderr.log &
+          tail_pid=$!
+          cleanup_tail() { kill -INT "$tail_pid" 2>/dev/null || true; wait "$tail_pid" 2>/dev/null || true; }
+          trap cleanup_tail EXIT
+          for attempt in $(seq 1 15); do
+            if ! kill -0 "$tail_pid" 2>/dev/null; then cat .wrangler/tail-stderr.log; exit 1; fi
+            sleep 1
+          done
+          npm run test:smoke 2>&1 | tee .wrangler/remote-smoke.log
+          sleep 3
+          cleanup_tail
+          node scripts/sanitize-worker-tail.mjs .wrangler/tail-raw.json .wrangler/worker-monitoring.json
+          rm -f .wrangler/tail-raw.json .wrangler/tail-stderr.log
+          cat .wrangler/worker-monitoring.json
+

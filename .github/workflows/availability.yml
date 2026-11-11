@@ -1,0 +1,31 @@
+name: Module 06 Public Availability
+
+on:
+  schedule:
+    - cron: '17 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: module06-availability
+  cancel-in-progress: true
+
+jobs:
+  health-check:
+    name: Daily public health probe
+    runs-on: ubuntu-latest
+    env:
+      APP_URL: https://cloud-devops-capstone-module06.cloud-webapp-module03.workers.dev
+    steps:
+      - name: Check Worker and D1 health over HTTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          body=$(mktemp)
+          trap 'rm -f "$body"' EXIT
+          status=$(curl --silent --show-error --output "$body" --write-out '%{http_code}' "$APP_URL/health")
+          test "$status" = "200"
+          node --input-type=module -e 'import fs from "node:fs"; const value=JSON.parse(fs.readFileSync(process.argv[1],"utf8")); if(value.status!=="ok"||value.database!=="connected") process.exit(1); console.log("HEALTH_OK status=ok database=connected");' "$body"
+          echo "Availability probe returned HTTP $status"

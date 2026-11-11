@@ -1,0 +1,202 @@
+{
+  "source": "wrangler tail --format json",
+  "privacy": "Client IP, headers, URL, geolocation, TLS fingerprints and log message content beyond safe request fields were omitted.",
+  "metrics": {
+    "invocationCount": 11,
+    "requestLogCount": 11,
+    "successfulInvocations": 11,
+    "errorInvocations": 0,
+    "httpErrorResponses": 8,
+    "serverErrorResponses": 0,
+    "statusCounts": {
+      "200": 3,
+      "400": 5,
+      "403": 1,
+      "413": 1,
+      "415": 1
+    },
+    "averageWallTimeMs": 30.64,
+    "averageCpuTimeMs": 0,
+    "averageApplicationDurationMs": 30.18
+  },
+  "invocations": [
+    {
+      "timestamp": 1794373843812,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 167,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844192,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 161,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844420,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 8,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844509,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 0,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844588,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 0,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844654,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 0,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844722,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 0,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844787,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 0,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844866,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 1,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373844946,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 0,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    },
+    {
+      "timestamp": 1794373845013,
+      "scriptName": "cloud-devops-capstone-module06",
+      "outcome": "ok",
+      "wallTimeMs": 0,
+      "cpuTimeMs": 0,
+      "exceptions": []
+    }
+  ],
+  "requests": [
+    {
+      "requestId": "4953630b-c77e-4bd3-970a-8dc4c062fcc1",
+      "method": "GET",
+      "route": "health",
+      "status": 200,
+      "durationMs": 167,
+      "level": "log"
+    },
+    {
+      "requestId": "6f8a9fcb-5909-4eeb-a233-8c12ccbe8e62",
+      "method": "GET",
+      "route": "health",
+      "status": 200,
+      "durationMs": 160,
+      "level": "log"
+    },
+    {
+      "requestId": "082552fa-227d-47f1-869c-e48aa7aad6de",
+      "method": "GET",
+      "route": "/",
+      "status": 200,
+      "durationMs": 5,
+      "level": "log"
+    },
+    {
+      "requestId": "7029ee1d-f7de-4bb5-8820-4bceb1b104ee",
+      "method": "GET",
+      "route": "tasks",
+      "status": 400,
+      "durationMs": 0,
+      "level": "log"
+    },
+    {
+      "requestId": "6db8c91f-ab29-4197-a93b-b8aa286e8840",
+      "method": "GET",
+      "route": "tasks",
+      "status": 400,
+      "durationMs": 0,
+      "level": "log"
+    },
+    {
+      "requestId": "54e6d530-5332-4ec5-8349-051a706cbf86",
+      "method": "GET",
+      "route": "tasks",
+      "status": 400,
+      "durationMs": 0,
+      "level": "log"
+    },
+    {
+      "requestId": "fe094b2b-5a22-47a1-a9e7-9d2126d4c4b0",
+      "method": "POST",
+      "route": "tasks",
+      "status": 403,
+      "durationMs": 0,
+      "level": "log"
+    },
+    {
+      "requestId": "f38532a4-115a-41c8-9f70-080340a81ca0",
+      "method": "POST",
+      "route": "tasks",
+      "status": 415,
+      "durationMs": 0,
+      "level": "log"
+    },
+    {
+      "requestId": "80a6c26c-1bda-49d0-b562-1064c65fa0d9",
+      "method": "POST",
+      "route": "tasks",
+      "status": 400,
+      "durationMs": 0,
+      "level": "log"
+    },
+    {
+      "requestId": "571fe12f-2f21-4bb6-a75a-95350fc247fa",
+      "method": "POST",
+      "route": "tasks",
+      "status": 413,
+      "durationMs": 0,
+      "level": "log"
+    },
+    {
+      "requestId": "8e8cee31-d402-4163-8261-e20580157344",
+      "method": "POST",
+      "route": "tasks",
+      "status": 400,
+      "durationMs": 0,
+      "level": "log"
+    }
+  ]
+}

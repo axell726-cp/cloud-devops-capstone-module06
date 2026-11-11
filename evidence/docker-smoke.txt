@@ -1,0 +1,31 @@
+
+> cloud-devops-capstone-module06@1.0.0 test:smoke
+> node scripts/smoke.mjs
+
+PASS /health reports Worker and D1 ready
+PASS /api/health compatibility route
+PASS TaskFlow Cloud static page
+PASS invalid state filter rejected
+PASS invalid priority filter rejected
+PASS oversized search term rejected
+PASS cross-origin mutation rejected
+PASS unsupported content type rejected
+PASS malformed JSON rejected
+PASS oversized request rejected
+PASS blank title rejected
+PASS invalid task state rejected
+PASS invalid task priority rejected
+PASS invalid task identifier rejected
+PASS unsupported API method rejected
+PASS create task with state and priority
+PASS list persisted task
+PASS filter in-progress tasks
+PASS search and priority filter
+PASS edit task title
+PASS update task state
+PASS update task priority
+PASS combine state, priority and search filters
+PASS statistics endpoint returns all states
+PASS delete test task
+PASS missing task returns HTTP 404
+SMOKE_OK checks=26 base=http://127.0.0.1:8787

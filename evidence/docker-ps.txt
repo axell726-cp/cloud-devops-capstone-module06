@@ -1,0 +1,2 @@
+NAME                               IMAGE                                  COMMAND                  SERVICE   CREATED              STATUS                        PORTS
+taskflow-capstone-module06-local   cloud-devops-capstone-module06:local   "docker-entrypoint.s…"   worker    About a minute ago   Up About a minute (healthy)   127.0.0.1:8787->8787/tcp
