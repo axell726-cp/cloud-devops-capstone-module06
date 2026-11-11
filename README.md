@@ -79,13 +79,15 @@ Compose limita el puerto a loopback, usa un volumen local exclusivo del capstone
 
 La base remota taskflow-capstone-module06 y su migración inicial fueron aplicadas con la sesión Wrangler del operador. La consulta de tareas desde producción ocurre por el binding D1 del Worker.
 
-El workflow de CI valida pushes y pull requests, construye y prueba Docker, y despliega solo desde main. Para activar el despliegue automático se requiere el secreto CLOUDFLARE_API_TOKEN y la variable CLOUDFLARE_DEPLOY_ENABLED=true, además de CLOUDFLARE_ACCOUNT_ID. El token debe tener permiso de edición/observabilidad para este Worker solamente. El workflow no accede directamente a D1; futuras migraciones remotas se ejecutan con una sesión autenticada de mantenimiento antes de publicar.
+El workflow de CI valida pushes y pull requests, construye y prueba Docker, y despliega solo desde main. El deploy requiere los secretos CLOUDFLARE_API_TOKEN y CLOUDFLARE_ACCOUNT_ID, más la variable CLOUDFLARE_DEPLOY_ENABLED=true. CLOUDFLARE_ACCOUNT_ID ya está configurado como GitHub Secret. El token debe usar Workers Editor con alcance Individual Workers y seleccionar solo cloud-devops-capstone-module06; ese rol permite desplegar el Worker existente y leer su observabilidad para wrangler tail. No requiere D1, Routes ni permisos Admin/globales. El workflow no accede directamente a D1; futuras migraciones remotas se ejecutan con una sesión autenticada de mantenimiento antes de publicar.
 
-La disponibilidad se comprueba una vez al día mediante GitHub Actions y también en cada smoke test. El chequeo diario es una sonda periódica, no monitoreo continuo ni una garantía de uptime.
+La disponibilidad se sondea diariamente y en cada push a main mediante GitHub Actions; también se verifica en smoke tests. Es una sonda periódica, no monitoreo continuo ni una garantía de uptime.
 
-## CI GitHub — primer run real
+## GitHub Actions — runs verificados
 
-El run inicial de GitHub Actions, disparado por el push a main, terminó exitosamente: [run 42968068471](https://github.com/axell726-cp/cloud-devops-capstone-module06/actions/runs/42968068471). El job de lint, pruebas, build y Docker pasó. El job de despliegue figura skipped porque CLOUDFLARE_API_TOKEN todavía no está configurado; por eso el despliegue automatizado aún no se declara completado. El secreto CLOUDFLARE_ACCOUNT_ID ya está guardado en el repositorio y el workflow lo consume desde GitHub Secrets. Al configurar el token de alcance mínimo, se activa el gate y se ejecuta nuevamente el pipeline para verificar el deploy.
+- Validación, tests, build y Docker pasaron en [run 42968990612](https://github.com/axell726-cp/cloud-devops-capstone-module06/actions/runs/42968990612), commit 4ae1820aa6480910c1ada809a2260beebf9db776.
+- El job Deploy and verify public Worker quedó skipped porque CLOUDFLARE_API_TOKEN no está configurado. El deploy automático por Actions sigue pendiente; el primer deploy público se hizo por Wrangler.
+- La sonda de disponibilidad pasó en [run 42968990625](https://github.com/axell726-cp/cloud-devops-capstone-module06/actions/runs/42968990625): HTTP 200, Worker healthy y D1 conectada.
 ## Ejecución verificada — 2026-11-11
 
 El Worker cloud-devops-capstone-module06 está publicado en la URL indicada y su binding conecta con la D1 nueva. Los 26 smoke checks remotos pasaron por HTTPS: salud, página, validación, CRUD, persistencia, filtros, estadísticas y eliminación de tareas de prueba. El Docker Compose local pasó también sus 26 smoke checks y el contenedor de validación se eliminó al final.
@@ -98,13 +100,14 @@ El primer despliegue se hizo con la sesión OAuth local de Wrangler. El workflow
 
 ## Observabilidad y evidencias
 
-El Worker registra JSON con ID de solicitud, método, ruta normalizada, código y duración; no registra el contenido de tareas ni IP del cliente. Errores internos guardan el tipo de error y el ID. El workflow de despliegue captura una muestra de Wrangler tail y elimina IP, headers, URL, geolocalización, huellas TLS y contenido antes de conservarla.
+El Worker registra JSON con ID de solicitud, método, ruta normalizada, código y duración; no registra el contenido de tareas ni IP del cliente. Errores internos guardan el tipo de error y el ID. La muestra de Wrangler tail actualmente guardada se capturó de forma manual y se sanitizó, eliminando IP, headers, URL, geolocalización, huellas TLS y contenido. El job automatizado recogerá otra muestra cuando se configure el secreto y se ejecute un deploy de CI.
 
 Los comandos, resultados auténticos y la captura pública app-desktop.png se guardan en evidence/. Consulta evidence/README.md para el índice. El despliegue inicial por Wrangler se distingue del despliegue CI/CD que se verificará en GitHub Actions.
 
 ## Seguridad y límites
 
 Las tareas se comparten entre visitantes, no son privadas. No uses la app para información real. Las limitaciones best-effort por IP viven en memoria de instancias aisladas y no sustituyen autenticación, protección WAF ni un límite distribuido.
+
 
 
 

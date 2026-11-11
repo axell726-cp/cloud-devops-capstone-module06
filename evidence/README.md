@@ -11,9 +11,11 @@ These files record authentic Module 06 results. Historical account preflight and
 - remote-smoke.txt — 26 real public HTTPS checks against production, including CRUD and D1 persistence.
 - worker-monitoring.json — sanitized sample from wrangler tail; excludes client IP, headers, URL, geolocation, TLS fingerprints and task content.
 - app-desktop.png — real Chrome headless local screenshot of the public TaskFlow page.
-- github-actions-validation.md — actual GitHub Actions run and per-job results.
+- github-actions-validation.md — actual GitHub Actions CI/build/Docker run and per-job results.
+- availability-action.md and post-actions-health.txt — actual public health probe and post-CI D1 checks.
 
 No tokens, credentials, or personal task contents are included. The monitoring sample is point-in-time evidence, not a continuous uptime guarantee.
+
 
 
 
