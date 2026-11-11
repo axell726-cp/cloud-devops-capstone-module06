@@ -85,7 +85,7 @@ La disponibilidad se comprueba una vez al día mediante GitHub Actions y tambié
 
 ## CI GitHub — primer run real
 
-El run inicial de GitHub Actions, disparado por el push a main, terminó exitosamente: [run 42968068471](https://github.com/axell726-cp/cloud-devops-capstone-module06/actions/runs/42968068471). El job de lint, pruebas, build y Docker pasó. El job de despliegue figura skipped porque CLOUDFLARE_API_TOKEN todavía no está configurado; por eso el despliegue automatizado aún no se declara completado. El secreto CLOUDFLARE_ACCOUNT_ID ya está guardado en el repositorio. Al configurar el token de alcance mínimo, se activa el gate y se ejecuta nuevamente el pipeline para verificar el deploy.
+El run inicial de GitHub Actions, disparado por el push a main, terminó exitosamente: [run 42968068471](https://github.com/axell726-cp/cloud-devops-capstone-module06/actions/runs/42968068471). El job de lint, pruebas, build y Docker pasó. El job de despliegue figura skipped porque CLOUDFLARE_API_TOKEN todavía no está configurado; por eso el despliegue automatizado aún no se declara completado. El secreto CLOUDFLARE_ACCOUNT_ID ya está guardado en el repositorio y el workflow lo consume desde GitHub Secrets. Al configurar el token de alcance mínimo, se activa el gate y se ejecuta nuevamente el pipeline para verificar el deploy.
 ## Ejecución verificada — 2026-11-11
 
 El Worker cloud-devops-capstone-module06 está publicado en la URL indicada y su binding conecta con la D1 nueva. Los 26 smoke checks remotos pasaron por HTTPS: salud, página, validación, CRUD, persistencia, filtros, estadísticas y eliminación de tareas de prueba. El Docker Compose local pasó también sus 26 smoke checks y el contenedor de validación se eliminó al final.
@@ -105,6 +105,7 @@ Los comandos, resultados auténticos y la captura pública app-desktop.png se gu
 ## Seguridad y límites
 
 Las tareas se comparten entre visitantes, no son privadas. No uses la app para información real. Las limitaciones best-effort por IP viven en memoria de instancias aisladas y no sustituyen autenticación, protección WAF ni un límite distribuido.
+
 
 
 

@@ -93,7 +93,7 @@ jobs:
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
           mkdir -p .wrangler
@@ -106,7 +106,7 @@ jobs:
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           BASE_URL: ${{ steps.deploy.outputs.worker_url }}
         run: |
           set -euo pipefail
@@ -125,4 +125,5 @@ jobs:
           node scripts/sanitize-worker-tail.mjs .wrangler/tail-raw.json .wrangler/worker-monitoring.json
           rm -f .wrangler/tail-raw.json .wrangler/tail-stderr.log
           cat .wrangler/worker-monitoring.json
+
 
