@@ -1,6 +1,8 @@
 name: Module 06 Public Availability
 
 on:
+  push:
+    branches: [main]
   schedule:
     - cron: '17 12 * * *'
   workflow_dispatch:
@@ -29,3 +31,4 @@ jobs:
           test "$status" = "200"
           node --input-type=module -e 'import fs from "node:fs"; const value=JSON.parse(fs.readFileSync(process.argv[1],"utf8")); if(value.status!=="ok"||value.database!=="connected") process.exit(1); console.log("HEALTH_OK status=ok database=connected");' "$body"
           echo "Availability probe returned HTTP $status"
+
